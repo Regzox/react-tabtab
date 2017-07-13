@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Tappable from 'react-tappable';
 
+import Badge from './Badge';
+
 export default class Tab extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +42,7 @@ export default class Tab extends React.Component {
     return (
       <div className={tabClass} onClick={this.clickTab}>
         {this.props.title}
+        <Badge unread={this.props.unread} />
         <div className="tabtab__folder__circCont" style={closeButtonStyle}>
           <div className="tabtab__folder__circle" onClick={this.handleTabDeleteButton}></div>
         </div>

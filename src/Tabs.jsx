@@ -91,9 +91,10 @@ export default class Tabs extends React.Component {
         status = 'inactive';
       }
       var props = {
-        key: 'tab'+index,
+        key: 'tab'+ index,
         tabKey: index,
         title: children.props.title,
+        unread: children.props.unread,
         status: status,
         style: that.state.style,
         handleTabClick: that.handleTabClick,

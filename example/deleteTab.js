@@ -13,7 +13,7 @@ export default class DeleteTab extends Component {
             addBackTab={false}
             tabDeleteButton={true}
             handleTabDeleteButton={handleTabDeleteButton}>
-        <Panel title="tab1">
+        <Panel title="tab1" unread="404">
           123121233132
         </Panel>
         <Panel title="tab2">

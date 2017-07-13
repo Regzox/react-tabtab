@@ -1,0 +1,13 @@
+.badge {
+	border-radius: 25px;
+	color: white;
+	background: red;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.visible {
+	visibility: visible;
+}
