@@ -42,7 +42,7 @@ export default class Tab extends React.Component {
     return (
       <div className={tabClass} onClick={this.clickTab}>
         {this.props.title}
-        <Badge unread={this.props.unread} />
+        <Badge unread={this.props.unread} handleBadgeClick={this.props.handleBadgeClick}/>
         <div className="tabtab__folder__circCont" style={closeButtonStyle}>
           <div className="tabtab__folder__circle" onClick={this.handleTabDeleteButton}></div>
         </div>

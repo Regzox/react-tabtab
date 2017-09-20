@@ -3,38 +3,94 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Tappable from 'react-tappable';
 
-// import styles from '../stylesheets/badge.css';
-
-const styles = {
-	badge: 'badge',
-	visible: 'visible',
-	invisible: 'invisible'
-}
+const Display = {
+	SHOWN: 'shown',
+	HIDDEN: 'hidden'
+};
 
 export default class Badge extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			class: styles.badge,
-			visibility: styles.invisible
+			styles: [
+				'badge'
+			],
+			display: Display.SHOWN
 		};
-		this.updateState = this.updateState.bind(this);
+
+		const hasUnread = parseInt(this.props.unread) > 0;
+
+		if (hasUnread) {
+			this.state.styles.push('shown');
+		} else {
+			this.state.styles.push('hidden');
+		}
+
+		this.display = this.display.bind(this);
+		this.hide = this.hide.bind(this);
+		this.show = this.show.bind(this);
 	}
 
-	updateState() {
-		this.state.visibility = (parseInt(this.props.unread) > 0) ? styles.visible : styles.invisible;
+	/**
+	 * Sets the display state with its style.
+
+	 * @param  {[type]} display [description]
+	 * @return {[type]}         [description]
+	 */
+	display(display) {
+		const styles = this.state.styles.filter(style => {
+			return Object.values(Display).includes(style);
+		});
+
+		styles.push(display);
+		this.setState(Object.assign({}, {
+			styles: styles,
+			display: display
+		}));
 	}
 
-	classNames() {
-		this.updateState();
-		
-		return this.state.class + ' ' + this.state.visibility;
+	/**
+	 * Shows the badge.
+	 * @return {[type]} [description]
+	 */
+	show() {
+		this.display(Display.SHOWN);
+	}
+
+	/**
+	 * Hides the badge.
+	 * @return {[type]} [description]
+	 */
+	hide() {
+		this.display(Display.HIDDEN);
+	}
+
+	/**
+	 * Update the badge state according to unread property changes.
+	 * @param  {[type]} nextProps [description]
+	 * @return {[type]}           [description]
+	 */
+	componentWillReceiveProps(nextProps) {
+		const hasUnread = parseInt(nextProps.unread) > 0;
+
+		if (hasUnread) {
+			/**
+			 * No opearations while has unread items.
+			 */
+		} else {
+			this.hide();
+		}
 	}
 
 	render() {
-		console.info(this.props.unread, typeof this.props.unread, parseInt(this.props.unread));
+		const styles = this.state.styles.join(' ');
+
 		return (
-			<span className={this.classNames()}>{this.props.unread}</span>
+			<span className={styles} onClick={() => {
+				this.props.handleBadgeClick();
+			}}>
+				{this.props.unread}
+			</span>
 		);
 	}
 }

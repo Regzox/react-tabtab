@@ -95,6 +95,7 @@ export default class Tabs extends React.Component {
         tabKey: index,
         title: children.props.title,
         unread: children.props.unread,
+        handleBadgeClick : children.props.handleBadgeClick,
         status: status,
         style: that.state.style,
         handleTabClick: that.handleTabClick,
