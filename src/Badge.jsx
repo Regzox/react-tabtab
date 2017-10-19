@@ -39,7 +39,7 @@ export default class Badge extends React.Component {
 	 */
 	display(display) {
 		const styles = this.state.styles.filter(style => {
-			return Object.values(Display).includes(style);
+			return Object.keys(Display).map(key => Display[key]).includes(style);
 		});
 
 		styles.push(display);
